@@ -18,7 +18,7 @@ import rasters
 import rasters as rt
 from modland import parsehv, generate_modland_grid
 
-from rasters import Raster, RasterGrid, RasterGeometry
+from rasters import Raster, RasterGrid, RasterGeometry, RasterGeolocation
 
 from .granule_ID import *
 
@@ -123,3 +123,33 @@ class VIIRSSwathGranule:
         """
         with h5py.File(self.filename_absolute, "r") as file:
             return list(file[f"{swath}/Data Fields/"].keys())
+
+    def read_latitude(self, swath: str) -> np.ndarray:
+        """
+        Read the latitude data from the granule.
+
+        :param swath: The swath name.
+        """
+        with h5py.File(self.filename_absolute, "r") as file:
+            return np.array(file[f"{swath}/Geolocation Fields/Latitude"])
+
+    def read_longitude(self, swath: str) -> np.ndarray:
+        """
+        Read the longitude data from the granule.
+
+        :param swath: The swath name.
+        """
+        with h5py.File(self.filename_absolute, "r") as file:
+            return np.array(file[f"{swath}/Geolocation Fields/Longitude"])
+        
+    def read_geometry(self, swath: str) -> RasterGeolocation:
+        """
+        Read the geometry data from the granule.
+
+        :param swath: The swath name.
+        """
+        return RasterGeolocation(
+            y=self.read_latitude(swath),
+            x=self.read_longitude(swath)
+        )
+    
