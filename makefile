@@ -1,3 +1,5 @@
+.PHONY: clean test build dist install uninstall
+
 clean:
 	rm -rf *.o *.out *.log
 	rm -rf build/
@@ -10,7 +12,7 @@ test:
 	pytest
 
 build:
-	python setup.py sdist
+	python -m build
 
 dist:
 	make build
