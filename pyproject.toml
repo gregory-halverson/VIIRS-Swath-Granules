@@ -3,7 +3,7 @@ requires = ["setuptools>=60", "setuptools-scm>=8.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "VIIRS_swath_granules"
+name = "VIIRS-Swath-Granules"
 version = "1.0.1"
 description = "Visible Infrared Imaging Radiometer Suite (VIIRS) Swath Product Search and Download Utility"
 readme = "README.md"
@@ -24,7 +24,7 @@ dependencies = [
     "requests"
 ]
 
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 
 [project.optional-dependencies]
 dev = [
