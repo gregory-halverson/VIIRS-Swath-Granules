@@ -133,10 +133,6 @@ def search_granules(
         
         # Add the polygon coordinates to the query
         query = query.polygon(coordinates)
-    
-    # Add tile constraint to the query if provided
-    if tile is not None:
-        query = query.readable_granule_name(f"*.{tile}.*")
 
     # Execute the query and handle exceptions
     granules: List[earthaccess.search.DataGranule]
