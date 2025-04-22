@@ -3,8 +3,8 @@ requires = ["setuptools>=60", "setuptools-scm>=8.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "VIIRS_swath_granules"
-version = "1.0.1"
+name = "VIIRS-Swath-Granules"
+version = "1.1.0"
 description = "Visible Infrared Imaging Radiometer Suite (VIIRS) Swath Product Search and Download Utility"
 readme = "README.md"
 authors = [
@@ -18,13 +18,13 @@ classifiers = [
 dependencies = [
     "colored-logging",
     "earthaccess",
-    "modland>=1.1.0",
+    "modland>=1.1.1",
     "python-dateutil",
     "rasters",
     "requests"
 ]
 
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 
 [project.optional-dependencies]
 dev = [
