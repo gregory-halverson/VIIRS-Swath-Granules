@@ -1,4 +1,4 @@
-.PHONY: clean test build dist install uninstall
+.PHONY: clean test build dist environment install uninstall reinstall
 
 clean:
 	rm -rf *.o *.out *.log
@@ -18,8 +18,13 @@ dist:
 	make build
 	twine upload dist/*
 
+environment:
+	mamba create -y -n VIIRS-Swath-Granules python=3.11 jupyter pykdtree
+
 install:
-	pip install -e .
+	pip install -e .[dev]
 
 uninstall:
 	pip uninstall -y VIIRS-Swath-Granules
+
+reinstall: uninstall install
