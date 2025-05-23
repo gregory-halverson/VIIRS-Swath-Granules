@@ -1,7 +1,10 @@
 import os
-from os.path import join, abspath, expanduser
+from os.path import join, abspath, expanduser, splitext
+import posixpath
 import earthaccess
+
 from modland import generate_modland_grid
+
 from .VIIRS_swath_granule import VIIRSSwathGranule
 from .granule_ID import *
 
@@ -27,8 +30,23 @@ def retrieve_granule(
     Returns:
         VIIRSSwathGranule: The downloaded and processed VIIRS tiled granule.
     """
+    # determine the URL of the remote granule
+    URL = None
+
+    for related_URL_dict in remote_granule["umm"]["RelatedUrls"]:
+        if related_URL_dict["Type"] == "GET DATA":
+            URL = related_URL_dict["URL"]
+    
+    if URL is None:
+        raise ValueError("No GET DATA URL found in the remote granule metadata.")
+
+    # Extract the granule ID from the URL
+    granule_ID = splitext(posixpath.basename(URL))[0]
+
     # Extract the granule ID from the remote granule metadata
-    granule_ID = remote_granule["meta"]["native-id"]
+    # import json
+    # print(json.dumps(remote_granule["meta"], indent=4))
+    # granule_ID = remote_granule["meta"]["native-id"]
     
     # Parse the product name, build number, and date from the granule ID
     product_name = parse_VIIRS_product(granule_ID)

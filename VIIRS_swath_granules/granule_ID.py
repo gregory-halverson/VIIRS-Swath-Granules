@@ -47,4 +47,7 @@ def parse_VIIRS_build(granule_ID: str) -> int:
     Returns:
         int: The build number extracted from the granule_ID.
     """
-    return int(basename(granule_ID).split(".")[3])
+    print(f"granule_ID: {granule_ID}")
+    build = int(basename(granule_ID).split(".")[3])
+    print(f"build: {build}")
+    return build
