@@ -2,7 +2,7 @@ import os
 from os.path import join, abspath, expanduser
 import earthaccess
 from modland import generate_modland_grid
-from .VIIRS_tiled_granules import VIIRSTiledGranule
+from .VIIRS_swath_granule import VIIRSSwathGranule
 from .granule_ID import *
 
 def anonymize_home_path(file_path: str) -> str:
@@ -16,7 +16,7 @@ def anonymize_home_path(file_path: str) -> str:
 def retrieve_granule(
         remote_granule: earthaccess.results.DataGranule, 
         download_directory: str = ".",
-        parent_directory: str = None) -> VIIRSTiledGranule:
+        parent_directory: str = None) -> VIIRSSwathGranule:
     """
     Retrieve and download a VIIRS granule from a remote source.
 
@@ -25,7 +25,7 @@ def retrieve_granule(
         download_directory (str): The directory where the granule will be downloaded.
 
     Returns:
-        VIIRSTiledGranule: The downloaded and processed VIIRS tiled granule.
+        VIIRSSwathGranule: The downloaded and processed VIIRS tiled granule.
     """
     # Extract the granule ID from the remote granule metadata
     granule_ID = remote_granule["meta"]["native-id"]
@@ -49,7 +49,7 @@ def retrieve_granule(
     # Anonymize the home path in the filename
     filename = anonymize_home_path(filename)
     
-    # Create a VIIRSTiledGranule object from the downloaded file
-    granule = VIIRSTiledGranule(filename)
+    # Create a VIIRSSwathGranule object from the downloaded file
+    granule = VIIRSSwathGranule(filename)
     
     return granule
