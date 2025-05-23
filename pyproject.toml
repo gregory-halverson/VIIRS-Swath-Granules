@@ -31,6 +31,8 @@ dev = [
     "build",
     "pytest>=6.0",
     "pytest-cov",
+    "jupyter",
+    "pytest",
     "twine"
 ]
 
@@ -41,5 +43,5 @@ VIIRS_swath_granules = ["*.txt"]
 "Homepage" = "https://github.com/JPL-Evapotranspiration-Algorithms/VIIRS-Swath-Granules"
 
 [tool.setuptools.packages.find]
-include = ["VIIRS_swath_granules"]
+include = ["python -c "import VIIRS_swath_granules; print(VIIRS_swath_granules.__file__)""]
 exclude = ["data", "build", "tests"]
